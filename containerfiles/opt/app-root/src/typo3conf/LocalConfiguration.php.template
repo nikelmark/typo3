@@ -1,0 +1,14 @@
+<?php
+return [
+  'BE' => [
+    'installToolPassword' => '${INST_TOOL_PW_HASH}',
+  ],
+  'DB' => [
+        'database' => '${MYSQL_DATABASE}',
+        'host' => 'mysql.${PROJECT}.svc.cluster.local',
+        'password' => '${MYSQL_PASSWORD}',
+        'port' => 3306,
+        'username' => '${MYSQL_USER}',
+      ]
+
+];
