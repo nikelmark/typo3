@@ -1,0 +1,6 @@
+<?php
+typo_db_username = '${TP_DB_USER}';
+typo_db_password = '${TP_DB_PW}';
+typo_db_host = '${TP_DB_HOST}';
+typo_db='${TP_DB_DB}';
+?>
