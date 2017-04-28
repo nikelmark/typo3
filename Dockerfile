@@ -12,7 +12,7 @@ USER 0
 ENV TZ=Europe/Vienna \
     TYPO3_VERSION=8.7.1 \
     TYPO3_DL_ROOT=https://downloads.sourceforge.net/project/typo3/TYPO3%20Source%20and%20Dummy/TYPO3%208.7.1/typo3_src-8.7.1 \
-    TYPO3_DL_TAIL=.tar.gz?use_mirror=kent
+    TYPO3_DL_TAIL=.tar.gz?r=&ts=1493118623&use_mirror=kent
 
 # only using for local docker test
 #ENV PROJECT=hasimausi \
@@ -24,7 +24,7 @@ ENV TZ=Europe/Vienna \
 # mod_authn_dbd mod_authn_dbm mod_authn_dbd mod_authn_dbm mod_echo mod_lua
 
 RUN set -x && \
-    yum -y autoremove rh-php56-php-pgsql rh-php56-php-ldap postgresql postgresql-devel postgresql-libs autoconf automake glibc-devel glibc-headers libcom_err-devel libcurl-devel libstdc++-devel make openssl-devel pcre-devel gcc gcc-c++ gdb gdb-gdbserver git libgcrypt-devel libgpg-error-devel libxml2-devel libxslt-devel openssh openssh-clients sqlite-devel zlib-devel  && \
+#   yum -y autoremove rh-php56-php-pgsql rh-php56-php-ldap postgresql postgresql-devel postgresql-libs autoconf automake glibc-devel glibc-headers libcom_err-devel libcurl-devel libstdc++-devel make openssl-devel pcre-devel gcc gcc-c++ gdb gdb-gdbserver git libgcrypt-devel libgpg-error-devel libxml2-devel libxslt-devel openssh openssh-clients sqlite-devel zlib-devel  && \
     rpm -qa|sort && \
     cd /tmp/ && \
     id && \
