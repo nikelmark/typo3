@@ -45,4 +45,4 @@ USER 1001
 COPY containerfiles/ /
 
 #CMD ["/bin/sh","-c","while true; do echo hello world; sleep 60; done"]
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/typo3/containerfiles/docker-entrypoint.sh"]
