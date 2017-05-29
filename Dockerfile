@@ -17,6 +17,7 @@ ENV CONTENT_DIR=/data/typo3-content \
 WORKDIR /tmp
 
 RUN set -x && \
+    yum clean all && \
     rm -fr /var/cache/* && \
     yum -y autoremove rh-php56-php-pgsql rh-php56-php-ldap postgresql postgresql-devel postgresql-libs autoconf automake glibc-devel glibc-headers libcom_err-devel libcurl-devel libstdc++-devel make openssl-devel pcre-devel gcc gcc-c++ gdb gdb-gdbserver git libgcrypt-devel libgpg-error-devel libxml2-devel libxslt-devel openssh openssh-clients sqlite-devel zlib-devel && \
     mkdir -p ${CONTENT_DIR} && \
