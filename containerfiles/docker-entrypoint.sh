@@ -23,7 +23,7 @@ if [ ! -d /data/typo3 ]; then
 fi
 if [ -e /opt/app-root/src/FIRST_INSTALL ]; then
   touch /opt/app-root/src/typo3conf/{LocalConfiguration.php,ENABLE_INSTALL_TOOL}
-  chmod 777 /opt/app-root/src/typo3conf/{LocalConfiguration.php,ENABLE_INSTALL_TOOL}
+  chmod 666 /opt/app-root/src/typo3conf/{LocalConfiguration.php,ENABLE_INSTALL_TOOL}
 fi
 
 if [ ! -s ${MY_TP3_ROOT}/typo3conf/LocalConfiguration.php ];
