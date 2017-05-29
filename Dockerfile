@@ -40,7 +40,7 @@ RUN set -x && \
 
 EXPOSE 8080
 
-USER 1001
+USER root
 
 COPY containerfiles/ /
 
