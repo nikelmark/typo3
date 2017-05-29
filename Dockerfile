@@ -1,23 +1,21 @@
 FROM registry.access.redhat.com/rhscl/php-56-rhel7:latest
-# Edit Version - original: TP3_VERS=7.6.4
+# Edit Version - original: TP3_VERS=8.7
 # To be able to change the Image
 USER 0
 
-ENV CONTENT_DIR=/data/typo3-content \
+ENV CONTENT_DIR=/data/typo3-content/ \
     APACHE_APP_ROOT=/opt/app-root/src \
-    TP3_VERS=8.7.0 \ 
+    TP3_VERS=8.7 \ 
     TP3_FULL_FILE=typo3_src-\${TP3_VERS}.tar.gz \
     TYPO3_DL=https://get.typo3.org/8.7
 
 # mod_authn_dbd mod_authn_dbm mod_authn_dbd mod_authn_dbm mod_echo mod_lua
 
-# tar from typo3 => typo3_src-7.6.4/...
 
 
 WORKDIR /tmp
 
 RUN set -x && \
-    yum clean all && \
     rm -fr /var/cache/* && \
     yum -y autoremove rh-php56-php-pgsql rh-php56-php-ldap postgresql postgresql-devel postgresql-libs autoconf automake glibc-devel glibc-headers libcom_err-devel libcurl-devel libstdc++-devel make openssl-devel pcre-devel gcc gcc-c++ gdb gdb-gdbserver git libgcrypt-devel libgpg-error-devel libxml2-devel libxslt-devel openssh openssh-clients sqlite-devel zlib-devel && \
     mkdir -p ${CONTENT_DIR} && \
