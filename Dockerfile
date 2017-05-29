@@ -7,7 +7,7 @@ ENV CONTENT_DIR=/data/typo3-content \
     APACHE_APP_ROOT=/opt/app-root/src \
     TP3_VERS=8.7.0 \ 
     TP3_FULL_FILE=typo3_src-\${TP3_VERS}.tar.gz \
-    TYPO3_DL=http://downloads.sourceforge.net/project/typo3/TYPO3%20Source%20and%20Dummy/TYPO3%20\${TP3_VERS}/\${TP3_FULL_FILE}?r=&ts=1459779530&use_mirror=tenet
+    TYPO3_DL=https://get.typo3.org/8.7
 
 # mod_authn_dbd mod_authn_dbm mod_authn_dbd mod_authn_dbm mod_echo mod_lua
 
@@ -17,7 +17,6 @@ ENV CONTENT_DIR=/data/typo3-content \
 WORKDIR /tmp
 
 RUN set -x && \
-    yum clean all && \
     rm -fr /var/cache/* && \
     yum -y autoremove rh-php56-php-pgsql rh-php56-php-ldap postgresql postgresql-devel postgresql-libs autoconf automake glibc-devel glibc-headers libcom_err-devel libcurl-devel libstdc++-devel make openssl-devel pcre-devel gcc gcc-c++ gdb gdb-gdbserver git libgcrypt-devel libgpg-error-devel libxml2-devel libxslt-devel openssh openssh-clients sqlite-devel zlib-devel && \
     mkdir -p ${CONTENT_DIR} && \
