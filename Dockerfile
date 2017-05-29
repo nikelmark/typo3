@@ -40,12 +40,12 @@ RUN set -x && \
 
 EXPOSE 8080
 
-USER root
-RUN chmod +x /docker-entrypoint.sh
 
 USER 1001
 COPY containerfiles/ /
 
+USER root
+RUN chmod +x /docker-entrypoint.sh
 
 RUN yum -y install httpd mod_ssl openssl
 
