@@ -31,7 +31,7 @@ then
   envsubst < ${MY_TP3_ROOT}/typo3conf/LocalConfiguration.php.template | sed -e 's/\$ /\$/g' > ${MY_TP3_ROOT}/typo3conf/LocalConfiguration.php
 fi
 
-if [ ! -d /data/typo3 ]; then
+if [ ! -d /data/typo3_src-8.7.1 ]; then
   cp -avx /tmp/typo3_src-8.7.1 /data/
 fi
 
