@@ -47,11 +47,6 @@ COPY containerfiles/ /
 USER root
 RUN chmod +x /docker-entrypoint.sh
 
-USER 1001
-RUN yum -y install httpd mod_ssl openssl
-
-ADD apache/httpd.conf /etc/httpd/conf/agavevhost.conf
-ADD apache/ssl.conf /etc/httpd/conf.d/ssl.conf
 
 #CMD ["/bin/sh","-c","while true; do echo hello world; sleep 60; done"]
 ENTRYPOINT ["/docker-entrypoint.sh"]
