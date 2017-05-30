@@ -5,6 +5,7 @@ set -x
 MY_TP3_ROOT=/opt/app-root/src
 TP3_CONTENT_ROOT=/data/typo3
 MY_SRV=$(echo $OPENSHIFT_BUILD_NAME|awk -F'-' '{print $1"-"$2}')
+TP3_VERS=8.7.1 
 
 WP_SITEURL=https://${MY_SRV}-${OPENSHIFT_BUILD_NAMESPACE}.${ENV_SUB_DOMAIN}
 
