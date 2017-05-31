@@ -47,7 +47,6 @@ COPY containerfiles/ /
 USER root
 RUN chmod +x /docker-entrypoint.sh
 
-USER 1001
 
 #CMD ["/bin/sh","-c","while true; do echo hello world; sleep 60; done"]
 ENTRYPOINT ["/docker-entrypoint.sh"]
