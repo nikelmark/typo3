@@ -42,4 +42,4 @@ env
 # cleanup some sensitiv data
 unset INST_TOOL_PW INST_TOOL_PW_HASH MYSQL_USER MYSQL_PASSWORD MYSQL_DATABASE
 
-exec /opt/rh/httpd24/root/sbin/httpd-scl-wrapper -D FOREGROUND
+exec /opt/rh/httpd24/root/usr/sbin/httpd-scl-wrapper -D FOREGROUND
