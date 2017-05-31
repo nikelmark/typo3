@@ -36,6 +36,7 @@ if [ ! -d /data/typo3_src-8.7.1 ]; then
 fi
 
 cat /data/typo3_src-8.7.1/_.htaccess > ${MY_TP3_ROOT}/.htaccess
+chcon -R -t httpd_sys_content_t ${MY_TP3_ROOT}/.htaccess
 
 env
 
