@@ -28,7 +28,6 @@ RUN set -x && \
     sed -i 's/;always_populate_raw_post_data.*/always_populate_raw_post_data = -1/' /etc/opt/rh/rh-php56/php.ini && \
     echo '<?php phpinfo(); ' > /opt/app-root/src/pinf.php && \
     echo 'xdebug.max_nesting_level=400'>>  /etc/opt/rh/rh-php56/php.d/15-xdebug.ini && \
-    chown -R 1001:0 ${CONTENT_DIR} ${APACHE_APP_ROOT} && \
     chmod 777 ${CONTENT_DIR} ${APACHE_APP_ROOT} && \
     chmod -R 777 ${CONTENT_DIR} /var/opt/rh/rh-php56/lib/php/session && \
     ln -s ${CONTENT_DIR}/$(basename $( echo ${TP3_FULL_FILE}|envsubst ) '') ${APACHE_APP_ROOT}/typo3_src && \
@@ -41,10 +40,9 @@ RUN set -x && \
 EXPOSE 8080
 
 
-USER 1001
+USER root
 COPY containerfiles/ /
 
-USER root
 RUN chmod +x /docker-entrypoint.sh
 
 
