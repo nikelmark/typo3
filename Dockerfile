@@ -40,7 +40,7 @@ RUN set -x && \
 EXPOSE 8080
 
 
-USER root
+USER default
 COPY containerfiles/ /
 
 RUN chmod +x /docker-entrypoint.sh
