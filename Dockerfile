@@ -41,9 +41,10 @@ EXPOSE 8080
 
 
 USER root
-COPY containerfiles/ /
-
 RUN chmod +x /docker-entrypoint.sh
+
+USER 1001
+COPY containerfiles/ /
 
 
 #CMD ["/bin/sh","-c","while true; do echo hello world; sleep 60; done"]
