@@ -46,7 +46,7 @@ USER root
 RUN chmod +x /docker-entrypoint.sh
 
 USER 1001
-RUN ln -l
+RUN pwd
 
 #CMD ["/bin/sh","-c","while true; do echo hello world; sleep 60; done"]
 ENTRYPOINT ["/docker-entrypoint.sh"]
