@@ -35,7 +35,7 @@ RUN set -x && \
     touch ${APACHE_APP_ROOT}/FIRST_INSTALL && \
     chmod 777 ${APACHE_APP_ROOT}/FIRST_INSTALL && \
     ln -s typo3_src/typo3 typo3 && \
-    ln -s typo3_src/index.php index.php
+    ln -s typo3_src/index.php index.php \
 
 EXPOSE 8080
 
