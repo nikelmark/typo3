@@ -37,7 +37,7 @@ fi
 
 cat /data/typo3_src-8.7.1/_.htaccess > ${MY_TP3_ROOT}/.htaccess
 
-mkdir /var/www/html/
+mkdir -p /var/www/html/
 cp /data/* /var/www/html/
 
 env
