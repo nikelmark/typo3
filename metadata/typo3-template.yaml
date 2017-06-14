@@ -190,7 +190,7 @@ objects:
         from:
           kind: ImageStreamTag
           name: typo3:latest
-          namespace: custom-images
+          namespace: typo3
       type: ImageChange
   status: {}
 - apiVersion: v1
