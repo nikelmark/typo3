@@ -3,7 +3,6 @@ kind: List
 metadata: {}
 items:
 - apiVersion: v2
-oc delete all --selector app=typo3
   kind: ImageStream
   metadata:
     labels:
