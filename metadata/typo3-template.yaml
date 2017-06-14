@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 kind: Template
 labels:
   template: itandtel-typo3-mysql-persistent
@@ -9,7 +9,7 @@ metadata:
   creationTimestamp: null
   name: itandtel-typo3
 objects:
-- apiVersion: v1
+- apiVersion: v2
   kind: PersistentVolumeClaim
   metadata:
     creationTimestamp: null
@@ -24,7 +24,7 @@ objects:
       requests:
         storage: 256Mi
   status: {}
-- apiVersion: v1
+- apiVersion: v2
   kind: PersistentVolumeClaim
   metadata:
     creationTimestamp: null
@@ -38,7 +38,7 @@ objects:
       requests:
         storage: 512Mi
   status: {}
-- apiVersion: v1
+- apiVersion: v2
   kind: DeploymentConfig
   metadata:
     creationTimestamp: null
@@ -73,7 +73,7 @@ objects:
           - name: PROJECT
             valueFrom:
               fieldRef:
-                apiVersion: v1
+                apiVersion: v2
                 fieldPath: metadata.namespace
           image: registry.access.redhat.com/rhscl/mysql-56-rhel7:latest
           imagePullPolicy: IfNotPresent
@@ -103,7 +103,7 @@ objects:
       type: ImageChange
     - type: ConfigChange
   status: {}
-- apiVersion: v1
+- apiVersion: v2
   kind: DeploymentConfig
   metadata:
     creationTimestamp: null
@@ -154,7 +154,7 @@ objects:
           - name: PROJECT
             valueFrom:
               fieldRef:
-                apiVersion: v1
+                apiVersion: v2
                 fieldPath: metadata.namespace
           image: typo3:latest
           imagePullPolicy: Always
@@ -193,7 +193,7 @@ objects:
           namespace: typo3
       type: ImageChange
   status: {}
-- apiVersion: v1
+- apiVersion: v2
   kind: Route
   metadata:
     creationTimestamp: null
@@ -211,7 +211,7 @@ objects:
       name: typo3
   status:
     ingress: null
-- apiVersion: v1
+- apiVersion: v2
   kind: Service
   metadata:
     creationTimestamp: null
@@ -230,7 +230,7 @@ objects:
     type: ClusterIP
   status:
     loadBalancer: {}
-- apiVersion: v1
+- apiVersion: v2
   kind: Service
   metadata:
     annotations:
