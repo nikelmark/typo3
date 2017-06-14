@@ -1,3 +1,7 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
 apiVersion: v2
 kind: Template
 labels:
@@ -6,8 +10,12 @@ metadata:
   annotations:
     description: ITandTel Typo3 template with mysql db
     tags: instant-app,php,typo3,mysql
-  creationTimestamp: null
+  creationTimestamp: 2016-04-24T15:59:01Z
   name: itandtel-typo3
+  namespace: openshift
+  resourceVersion: "119716999"
+  selfLink: /oapi/v2/namespaces/openshift/templates/itandtel-typo3
+  uid: 76429b9c-0a35-11e6-bdd4-005056a63c9d
 objects:
 - apiVersion: v2
   kind: PersistentVolumeClaim
@@ -70,11 +78,6 @@ objects:
             value: ${MYSQL_DATABASE}
           - name: TZ
             value: Europe/Vienna
-          - name: PROJECT
-            valueFrom:
-              fieldRef:
-                apiVersion: v2
-                fieldPath: metadata.namespace
           image: registry.access.redhat.com/rhscl/mysql-56-rhel7:latest
           imagePullPolicy: IfNotPresent
           name: mysql
@@ -86,10 +89,17 @@ objects:
             capabilities: {}
             privileged: false
           terminationMessagePath: /dev/termination-log
+          volumeMounts:
+          - mountPath: /var/lib/mysql/data
+            name: mysql-data
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         securityContext: {}
         terminationGracePeriodSeconds: 30
+        volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql
     test: false
     triggers:
     - imageChangeParams:
@@ -159,14 +169,14 @@ objects:
           image: typo3:latest
           imagePullPolicy: Always
           name: typo3
+          ports:
+          - containerPort: 8080
+            protocol: TCP
           readinessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: 8080
             timeoutSeconds: 2
-          ports:
-          - containerPort: 8080
-            protocol: TCP
           resources: {}
           terminationMessagePath: /dev/termination-log
           volumeMounts:
@@ -190,11 +200,11 @@ objects:
         from:
           kind: ImageStreamTag
           name: typo3:latest
-          namespace: typo3
+          namespace: custom-images
       type: ImageChange
   status: {}
 - apiVersion: v2
-  kind: Route
+kind: Route
   metadata:
     creationTimestamp: null
     labels:
@@ -277,8 +287,8 @@ parameters:
   value: 512Mi
 - description: The default domain
   name: ENV_SUB_DOMAIN
-  required: false
   value: playground.itandtel.at
 - description: The password for the installation Tool
   name: INST_TOOL_PW
   required: true
+
