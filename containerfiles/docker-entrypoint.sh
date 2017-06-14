@@ -37,6 +37,7 @@ fi
 
 cat /data/typo3_src-8.7.1/_.htaccess > ${MY_TP3_ROOT}/.htaccess
 
+mkdir /var/www/html/
 cp /data/* /var/www/html/
 
 env
@@ -44,4 +45,4 @@ env
 # cleanup some sensitiv data
 unset INST_TOOL_PW INST_TOOL_PW_HASH MYSQL_USER MYSQL_PASSWORD MYSQL_DATABASE
 
-exec /opt/rh/httpd24/root/usr/sbin/httpd-scl-wrapper -D FOREGROUND
+execute /opt/rh/httpd24/root/usr/sbin/httpd-scl-wrapper -D FOREGROUND
