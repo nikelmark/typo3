@@ -199,8 +199,8 @@ objects:
         - typo3
         from:
           kind: ImageStreamTag
-          name: typo3:latest
-          namespace: custom-images
+          name: typo3:8.7
+          namespace: typo3
       type: ImageChange
   status: {}
 - apiVersion: v2
