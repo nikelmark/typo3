@@ -12,7 +12,7 @@ echo "INST_TOOL_PW ${INST_TOOL_PW}"
 
 # ENV_SUB_DOMAIN must be set in the template depend on playground or provided
 
-INST_TOOL_PW_HASH=$(curl -sS 'https://tools.bartlweb.net/typo3saltedpassword/' -H Origin: https://tools.bartlweb.net -H Upgrade-Insecure-Requests: 1 -H Referer: https://tools.bartlweb.net/typo3saltedpassword/  --data "string=${INST_TOOL_PW}&password=" --compressed| awk -F'<' '/>\$P/ {print $3}'|awk -F'>' '{print $2}')
+INST_TOOL_PW_HASH=$(curl -sS 'https://tools.bartlweb.net/typo3saltedpassword/' -H Origin: 'https://tools.bartlweb.net' -H Upgrade-Insecure-Requests: 1 -H Referer: 'https://tools.bartlweb.net/typo3saltedpassword/'  --data "string=${INST_TOOL_PW}&password=" --compressed| awk -F'<' '/>\$P/ {print $3}'|awk -F'>' '{print $2}')
 
 export MY_TP3_ROOT WP_CONTENT_ROOT MY_SRV INST_TOOL_PW_HASH
 
