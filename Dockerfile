@@ -1,49 +1,47 @@
-FROM registry.access.redhat.com/rhscl/php-56-rhel7:latest
-# Edit Version - original: TP3_VERS=8.7.1
-# To be able to change the Image
-USER 0
+FROM php:7-apache
+MAINTAINER Martin Helmich <typo3@martin-helmich.de>
 
-ENV CONTENT_DIR=/data/typo3-content/ \
-    APACHE_APP_ROOT=/opt/app-root/src \
-    TP3_VERS=8.7.1 \ 
-    TP3_FULL_FILE=typo3_src-\${TP3_VERS} \
-    TYPO3_DL=https://get.typo3.org/8.7
+# Install TYPO3
+RUN apt-get update &&\
+    apt-get install -y --no-install-recommends \
+        wget \
+# Configure PHP
+        libxml2-dev libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng12-dev \
+        zlib1g-dev \
+# Install required 3rd party tools
+        graphicsmagick && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-install -j$(nproc) mysqli soap gd zip opcache && \
+    echo 'always_populate_raw_post_data = -1\nmax_execution_time = 240\nmax_input_vars = 1500\nupload_max_filesize = 32M\npost_max_size = 32M' > /usr/local/etc/php/conf.d/typo3.ini && \
+# Configure Apache as needed
+    a2enmod rewrite && \
+    apt-get clean && \
+    apt-get -y purge \
+        libxml2-dev libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng12-dev \
+        zlib1g-dev && \
+    rm -rf /var/lib/apt/lists/* /usr/src/*
 
-# mod_authn_dbd mod_authn_dbm mod_authn_dbd mod_authn_dbm mod_echo mod_lua
+RUN cd /var/www/html && \
+    wget -O - https://get.typo3.org/8.7 | tar -xzf - && \
+    ln -s typo3_src-* typo3_src && \
+    ln -s typo3_src/index.php && \
+    ln -s typo3_src/typo3 && \
+    ln -s typo3_src/_.htaccess .htaccess && \
+    mkdir typo3temp && \
+    mkdir typo3conf && \
+    mkdir fileadmin && \
+    mkdir uploads && \
+    touch FIRST_INSTALL && \
+    chown -R www-data. .
 
-
-
-WORKDIR /tmp
-
-RUN set -x && \
-    rm -fr /var/cache/* && \
-    yum -y autoremove rh-php56-php-pgsql rh-php56-php-ldap postgresql postgresql-devel postgresql-libs autoconf automake glibc-devel glibc-headers libcom_err-devel libcurl-devel libstdc++-devel make openssl-devel pcre-devel gcc gcc-c++ gdb gdb-gdbserver git libgcrypt-devel libgpg-error-devel libxml2-devel libxslt-devel openssh openssh-clients sqlite-devel zlib-devel && \
-    mkdir -p ${CONTENT_DIR} && \
-    wget https://get.typo3.org/${TP3_VERS} && \
-    tar -xf ${TP3_VERS} && \
-    sed -i 's/LogFormat "%h /LogFormat "%{X-Forwarded-For}i /' /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf && \
-    sed -i 's/;date.timezone.*/date.timezone = Europe\/Vienna/' /etc/opt/rh/rh-php56/php.ini && \
-    sed -i 's/; max_input_vars.*/max_input_vars = 1500/' /etc/opt/rh/rh-php56/php.ini && \
-    sed -i 's/max_execution_time.*/max_execution_time = 240/' /etc/opt/rh/rh-php56/php.ini && \
-    sed -i 's/;always_populate_raw_post_data.*/always_populate_raw_post_data = -1/' /etc/opt/rh/rh-php56/php.ini && \
-    echo '<?php phpinfo(); ' > /opt/app-root/src/pinf.php && \
-    echo 'xdebug.max_nesting_level=400'>>  /etc/opt/rh/rh-php56/php.d/15-xdebug.ini && \
-    chmod 777 ${CONTENT_DIR} ${APACHE_APP_ROOT} && \
-    chmod -R 777 ${CONTENT_DIR} /var/opt/rh/rh-php56/lib/php/session && \
-    ln -s ${CONTENT_DIR}/$(basename $( echo ${TP3_FULL_FILE}|envsubst ) '') ${APACHE_APP_ROOT}/typo3_src && \
-    cd ${APACHE_APP_ROOT} && \
-    touch ${APACHE_APP_ROOT}/FIRST_INSTALL && \
-    chmod 777 ${APACHE_APP_ROOT}/FIRST_INSTALL && \
-    ln -s typo3_src/typo3 typo3 && \
-    ln -s typo3_src/index.php index.php 
-
-EXPOSE 8080
-
-
-COPY containerfiles/ /
-
-
-RUN chmod +x /docker-entrypoint.sh
-
-#CMD ["/bin/sh","-c","while true; do echo hello world; sleep 60; done"]
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# Configure volumes
+VOLUME /var/www/html/fileadmin
+VOLUME /var/www/html/typo3conf
+VOLUME /var/www/html/typo3temp
+VOLUME /var/www/html/uploads
