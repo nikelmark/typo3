@@ -47,13 +47,13 @@ RUN cd /var/www/html && \
     mkdir fileadmin && \
     mkdir uploads && \
     touch FIRST_INSTALL && \
-    addgroup --gid 100001 33
-    adduser user --force-badname --uid 100001 --gid 100001 --disabled-password 33
-    cp -Rvf /etc/skel/.[a-z]* www-data
-    usermod 33 --del-subuids 1-1000000000
-    usermod 33 --del-subgids 1-1000000000
-    usermod --add-subuids 100100000-100165535 33
-    usermod --add-subgids 100100000-100165535 33
+    addgroup --gid 100001 33 && \
+    adduser user --force-badname --uid 100001 --gid 100001 --disabled-password 33 && \
+    cp -Rvf /etc/skel/.[a-z]* www-data && \
+    usermod 33 --del-subuids 1-1000000000 && \
+    usermod 33 --del-subgids 1-1000000000 && \
+    usermod --add-subuids 100100000-100165535 33 && \
+    usermod --add-subgids 100100000-100165535 33 && \
     chown -Rvf 33:33 www-data. .
     
 
