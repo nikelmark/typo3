@@ -47,7 +47,6 @@ RUN cd /var/www/html && \
     mkdir fileadmin && \
     mkdir uploads && \
     touch FIRST_INSTALL && \
-    usermod --add-subuids 100100000-100165535 33 && \
     chown -Rvf 33:33 www-data. .
     
 
