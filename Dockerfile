@@ -50,8 +50,7 @@ VOLUME /var/www/html/uploads
 
 # Configure Apache priviledges
 
-RUN sed -i 's/Listen 80/Listen 8080/g'
-/etc/apache2/ports.conf
+RUN sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf
 EXPOSE 8080
 RUN chmod g+w /var/log/apache2 &&\
     chmod g+w /var/lock/apache2 &&\
