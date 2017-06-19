@@ -56,4 +56,3 @@ VOLUME /var/www/html/typo3conf
 VOLUME /var/www/html/typo3temp
 VOLUME /var/www/html/uploads
 
-CMD ["apache2-foreground"]
