@@ -40,6 +40,14 @@ RUN cd /var/www/html && \
     touch FIRST_INSTALL && \
     chown -R www-data. .
     
+
+
+# Configure volumes
+VOLUME /var/www/html/fileadmin
+VOLUME /var/www/html/typo3conf
+VOLUME /var/www/html/typo3temp
+VOLUME /var/www/html/uploads
+
 # Configure Apache priviledges
 
 RUN sed -i 's/Listen 80/Listen 8080/g'
@@ -48,10 +56,3 @@ EXPOSE 8080
 RUN chmod g+w /var/log/apache2 &&\
     chmod g+w /var/lock/apache2 &&\
     chmod g+w /var/run/apache2 
-
-
-# Configure volumes
-VOLUME /var/www/html/fileadmin
-VOLUME /var/www/html/typo3conf
-VOLUME /var/www/html/typo3temp
-VOLUME /var/www/html/uploads
