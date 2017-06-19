@@ -47,10 +47,7 @@ RUN cd /var/www/html && \
     mkdir fileadmin && \
     mkdir uploads && \
     touch FIRST_INSTALL && \
-    usermod --del-subuids 1-1000000000 && \
-    usermod --del-subgids 1-1000000000 && \
     usermod --add-subuids 100100000-100165535 33 && \
-    usermod --add-subgids 100100000-100165535 33 && \
     chown -Rvf 33:33 www-data. .
     
 
