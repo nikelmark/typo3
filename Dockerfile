@@ -52,6 +52,6 @@ VOLUME /var/www/html/uploads
 
 RUN sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf
 EXPOSE 8080
-RUN chmod g+w /var/log/apache2 &&\
-    chmod g+w /var/lock/apache2 &&\
+RUN chmod g+w /var/log/apache2 && \
+    chmod g+w /var/lock/apache2 && \
     chmod g+w /var/run/apache2 
