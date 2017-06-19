@@ -38,8 +38,17 @@ RUN cd /var/www/html && \
     mkdir fileadmin && \
     mkdir uploads && \
     touch FIRST_INSTALL && \
-    usermod --add-subuids 100100000-100165535 www-data && \
     chown -R www-data. .
+    
+# Configure Apache priviledges
+
+RUN sed -i 's/Listen 80/Listen 8080/g'
+/etc/apache2/ports.conf
+EXPOSE 8080
+RUN chmod g+w /var/log/apache2 &&\
+    chmod g+w /var/lock/apache2 &&\
+    chmod g+w /var/run/apache2 
+
 
 # Configure volumes
 VOLUME /var/www/html/fileadmin
