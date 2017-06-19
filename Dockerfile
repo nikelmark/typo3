@@ -33,7 +33,8 @@ RUN sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf
 EXPOSE 8080
 RUN chmod g+w /var/log/apache2 && \
     chmod g+w /var/lock/apache2 && \
-    chmod g+w /var/run/apache2 
+    chmod g+w /var/run/apache2 && \
+    service apache2 restart
 
 RUN cd /var/www/html && \
     wget -O - https://get.typo3.org/8.7 | tar -xzf - && \
