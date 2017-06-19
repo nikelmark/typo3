@@ -26,6 +26,14 @@ RUN apt-get update &&\
         libpng12-dev \
         zlib1g-dev && \
     rm -rf /var/lib/apt/lists/* /usr/src/*
+    
+# Configure Apache priviledges
+
+RUN sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf
+EXPOSE 8080
+RUN chmod g+w /var/log/apache2 && \
+    chmod g+w /var/lock/apache2 && \
+    chmod g+w /var/run/apache2 
 
 RUN cd /var/www/html && \
     wget -O - https://get.typo3.org/8.7 | tar -xzf - && \
@@ -47,11 +55,3 @@ VOLUME /var/www/html/fileadmin
 VOLUME /var/www/html/typo3conf
 VOLUME /var/www/html/typo3temp
 VOLUME /var/www/html/uploads
-
-# Configure Apache priviledges
-
-RUN sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf
-EXPOSE 8080
-RUN chmod g+w /var/log/apache2 && \
-    chmod g+w /var/lock/apache2 && \
-    chmod g+w /var/run/apache2 
