@@ -47,7 +47,8 @@ RUN cd /var/www/html && \
     mkdir fileadmin && \
     mkdir uploads && \
     touch FIRST_INSTALL && \
-    chown -R www-data. .
+    addgroup --gid 100001 33
+    chown -Rvf 33:33 www-data. .
     
 
 
