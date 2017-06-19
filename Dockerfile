@@ -1,5 +1,5 @@
 FROM php:7-apache
-MAINTAINER Martin Helmich <typo3@martin-helmich.de>
+MAINTAINER Nikel Mark
 
 # Install TYPO3
 RUN apt-get update &&\
