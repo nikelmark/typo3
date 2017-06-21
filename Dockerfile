@@ -11,7 +11,7 @@ RUN apt-get update &&\
         libmcrypt-dev \
         libpng12-dev \
         zlib1g-dev \
-        pcre3-dev \
+        libpcre3-dev \
 # Install required 3rd party tools
         graphicsmagick && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
