@@ -32,8 +32,7 @@ RUN apt-get update &&\
     
 # Install pcre 
 
-RUN apt-get install checkinstall -y && \
-    apt-get install automake -y && \
+RUN apt-get install automake -y && \
     apt-get install libbz2-1.0 libbz2-dev libbz2-ocaml libbz2-ocaml-dev -y && \
     apt-get install libreadline-dev -y && \
     wget https://netix.dl.sourceforge.net/project/pcre/pcre/8.40/pcre-8.40.tar.gz && \
