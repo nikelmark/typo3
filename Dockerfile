@@ -1,19 +1,6 @@
 FROM php:7-apache
 MAINTAINER Nikel Mark
 
-# Install pcre 
-
-RUN wget https://netix.dl.sourceforge.net/project/pcre/pcre/8.40/pcre-8.40.tar.gz && \
-    tar -xvzf pcre-8.40.tar.gz && \
-    cd pcre-8.40 && \
-    ./configure --prefix=/usr --docdir=/usr/share/doc/pcre-8.40 --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32  --enable-pcretest-libreadline --disable-static && \
-    make && \
-    make check && \
-    make install && \
-    mv -v /usr/lib/libpcre.so.* /lib && \
-    ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so && \
-    service apache2 restart && \
-
 # Install TYPO3
 RUN apt-get update &&\
     apt-get install -y --no-install-recommends apt-utils \
@@ -41,6 +28,19 @@ RUN apt-get update &&\
         libpng12-dev \
         zlib1g-dev && \
     rm -rf /var/lib/apt/lists/* /usr/src/*
+    
+# Install pcre 
+
+RUN wget https://netix.dl.sourceforge.net/project/pcre/pcre/8.40/pcre-8.40.tar.gz && \
+    tar -xvzf pcre-8.40.tar.gz && \
+    cd pcre-8.40 && \
+    ./configure --prefix=/usr --docdir=/usr/share/doc/pcre-8.40 --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32  --enable-pcretest-libreadline --disable-static && \
+    make && \
+    make check && \
+    make install && \
+    mv -v /usr/lib/libpcre.so.* /lib && \
+    ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so && \
+    service apache2 restart 
     
     
 # Configure Apache priviledges
