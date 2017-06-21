@@ -35,6 +35,7 @@ RUN apt-get update &&\
 RUN wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.40.tar.bz2 && \
     tar -xf pcre-8.40.tar.bz2 && \
     cd pcre-8.40 && \
+    apt-get install bzip2 && \
     ./configure --prefix=/usr --docdir=/usr/share/doc/pcre-8.40 --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-pcretest-libreadline --disable-static && \
     make && \
     make check && \
