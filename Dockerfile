@@ -37,7 +37,7 @@ RUN apt-get install build-essential && \
     apt-get install automake && \
     apt-get install libbz2-1.0 libbz2-dev libbz2-ocaml libbz2-ocaml-dev && \
     apt-get install libreadline-dev && \
-    wget https://downloads.sourceforge.net/project/pcre/pcre/8.40/pcre-8.40.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fpcre%2Ffiles%2Fpcre%2F8.40%2F&ts=1498043168&use_mirror=netcologne && \
+    wget https://netix.dl.sourceforge.net/project/pcre/pcre/8.40/pcre-8.40.tar.gz && \
     tar -xvzf pcre-8.40.tar.gz && \
     cd pcre-8.40 && \
     ./configure --prefix=/usr --docdir=/usr/share/doc/pcre-8.40 --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-pcretest-libreadline --disable-static && \
