@@ -34,7 +34,7 @@ RUN apt-get update &&\
 RUN wget https://netix.dl.sourceforge.net/project/pcre/pcre/8.40/pcre-8.40.tar.gz && \
     tar -xvzf pcre-8.40.tar.gz && \
     cd pcre-8.40 && \
-    ./configure --prefix=/usr --docdir=/usr/share/doc/pcre-8.40 --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32  --enable-pcretest-libreadline --disable-static && \
+    ./configure --prefix=/usr --docdir=/usr/share/doc/pcre-8.40 --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --disable-static && \
     make && \
     make check && \
     make install && \
