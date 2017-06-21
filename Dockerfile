@@ -30,23 +30,6 @@ RUN apt-get update &&\
     rm -rf /var/lib/apt/lists/* /usr/src/*
     
     
-# Install pcre 
-
-RUN wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.40.tar.bz2 && \
-    tar -xf pcre-8.40.tar.bz2 && \
-    cd pcre-8.40 && \
-    apt-get remove --auto-remove bzip2 -y && \
-    apt-get update -y && \
-    apt-get install bzip2 -y && \
-    apt-get install libbz2-dev -y && \
-    apt-get update -y && \
-    ./configure --prefix=/usr --docdir=/usr/share/doc/pcre-8.40 --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-pcretest-libreadline --disable-static && \
-    make && \
-    make check && \
-    make install && \
-    mv -v /usr/lib/libpcre.so.* /lib && \
-    ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so
-    
 # Configure Apache priviledges
 
 RUN sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf
