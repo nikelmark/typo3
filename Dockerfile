@@ -32,7 +32,11 @@ RUN apt-get update &&\
     
 # Install pcre 
 
-RUN wget https://netix.dl.sourceforge.net/project/pcre/pcre/8.40/pcre-8.40.tar.gz && \
+RUN apt-get install checkinstall -y && \
+    apt-get install automake -y && \
+    apt-get install libbz2-1.0 libbz2-dev libbz2-ocaml libbz2-ocaml-dev -y && \
+    apt-get install libreadline-dev -y && \
+    wget https://netix.dl.sourceforge.net/project/pcre/pcre/8.40/pcre-8.40.tar.gz && \
     tar -xvzf pcre-8.40.tar.gz && \
     cd pcre-8.40 && \
     ./configure --prefix=/usr --docdir=/usr/share/doc/pcre-8.40 --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-pcretest-libreadline --disable-static && \
