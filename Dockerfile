@@ -3,7 +3,7 @@ MAINTAINER Nikel Mark
 
 # Install TYPO3
 RUN apt-get update &&\
-    apt-get install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends apt-utils \
         wget \
 # Configure PHP
         libxml2-dev libfreetype6-dev \
