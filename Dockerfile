@@ -11,7 +11,7 @@ RUN apt-get update &&\
         libmcrypt-dev \
         libpng12-dev \
         zlib1g-dev \
-        libpcre3-dev \
+        pcre3-dev \
 # Install required 3rd party tools
         graphicsmagick && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
@@ -21,7 +21,6 @@ RUN apt-get update &&\
 
 # Configure Apache as needed
     a2enmod rewrite && \
-    apk add --update pcre && \
     apt-get clean && \
     apt-get -y purge \
         libxml2-dev libfreetype6-dev \
