@@ -1,6 +1,10 @@
 FROM php:7.1-apache
 MAINTAINER Nikel Mark
 
+
+# add user
+RUN adduser user
+
 # Install TYPO3
 RUN apt-get update &&\
     apt-get install -y --no-install-recommends \
@@ -37,7 +41,6 @@ RUN chmod g+w /var/log/apache2 && \
     chmod g+w /var/lock/apache2 && \
     chmod g+w /var/run/apache2 
 
-USER 1001
 
 RUN cd /var/www/html && \
     wget -O - https://netcologne.dl.sourceforge.net/project/typo3/TYPO3%20Source%20and%20Dummy/TYPO3%208.7.1/typo3_src-8.7.1.tar.gz | tar -xzf - && \
@@ -59,3 +62,6 @@ VOLUME /var/www/html/fileadmin
 VOLUME /var/www/html/typo3conf
 VOLUME /var/www/html/typo3temp
 VOLUME /var/www/html/uploads
+
+RUN su - user -c "touch me"
+CMD ["su", "-", "user", "-c", "/bin/bash"]
