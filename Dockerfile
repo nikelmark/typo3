@@ -1,6 +1,7 @@
 FROM registry.access.redhat.com/rhscl/php-70-rhel7
 MAINTAINER Nikel Mark
 
+USER root
 
 # Install TYPO3
 RUN yum update &&\
@@ -50,7 +51,7 @@ RUN cd /var/www/html && \
     mkdir fileadmin && \
     mkdir uploads && \
     touch FIRST_INSTALL && \
-    chown -Rvf www-data. .
+    chown -Rvf 1001:0 www-data. .
     
 
 
@@ -59,4 +60,6 @@ VOLUME /var/www/html/fileadmin
 VOLUME /var/www/html/typo3conf
 VOLUME /var/www/html/typo3temp
 VOLUME /var/www/html/uploads
+
+USER 1001
 
