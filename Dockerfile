@@ -5,7 +5,7 @@ USER root
 
 # Install TYPO3
 RUN yum update &&\
-    yum install -y --no-install-recommends \
+    yum install -y \
         wget \
 # Configure PHP
         libxml2-dev libfreetype6-dev \
