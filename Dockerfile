@@ -3,6 +3,7 @@ MAINTAINER Nikel Mark
 
 # Add the user UID:1000, GID:1000, home at /app
 RUN groupadd -r docker && \
+    useradd -u 1000 -r -g user
     usermod -aG docker user
 
 
