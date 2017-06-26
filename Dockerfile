@@ -1,10 +1,10 @@
-FROM php:7.1-apache
+FROM registry.access.redhat.com/rhscl/php-70-rhel7
 MAINTAINER Nikel Mark
 
 
 # Install TYPO3
-RUN apt-get update &&\
-    apt-get install -y --no-install-recommends \
+RUN yum update &&\
+    yum install -y --no-install-recommends \
         wget \
 # Configure PHP
         libxml2-dev libfreetype6-dev \
@@ -59,14 +59,4 @@ VOLUME /var/www/html/fileadmin
 VOLUME /var/www/html/typo3conf
 VOLUME /var/www/html/typo3temp
 VOLUME /var/www/html/uploads
-
-# Add the user UID:1000, GID:1000, home at /app
-RUN groupadd -r app -g 1000 && useradd -u 1000 -r -g app -m -d /app -s /sbin/nologin -c "App user" app && \
-    chmod 755 /app
-
-# Set the working directory to app home directory
-WORKDIR /app
-
-# Specify the user to execute all commands below
-USER app
 
