@@ -3,12 +3,12 @@ MAINTAINER Nikel Mark
 
 # Add the user UID:1000, GID:1000, home at /app
 RUN groupadd -r docker && \
-    useradd -u 1000 -r -g user
+    useradd -u 1000 -r -g docker
     usermod -aG docker user
 
 
 # Specify the user to execute all commands below
-USER user
+USER 1000
 
 # Install TYPO3
 RUN apt-get update && \
