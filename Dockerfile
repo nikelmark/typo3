@@ -1,9 +1,16 @@
 FROM php:7.1-apache
 MAINTAINER Nikel Mark
 
+# Add the user UID:1000, GID:1000, home at /app
+RUN groupadd -r docker && \
+    usermod -aG docker user
+
+
+# Specify the user to execute all commands below
+USER user
 
 # Install TYPO3
-RUN apt-get update &&\
+RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         wget \
 # Configure PHP
@@ -59,11 +66,3 @@ VOLUME /var/www/html/fileadmin
 VOLUME /var/www/html/typo3conf
 VOLUME /var/www/html/typo3temp
 VOLUME /var/www/html/uploads
-
-# Add the user UID:1000, GID:1000, home at /app
-RUN groupadd -r app -g 1000 && useradd -u 1000 -r -g app -m -d /app -s /sbin/nologin -c "App user" app && \
-    chmod 755 /app
-
-
-# Specify the user to execute all commands below
-USER app
