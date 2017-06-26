@@ -64,8 +64,6 @@ VOLUME /var/www/html/uploads
 RUN groupadd -r app -g 1000 && useradd -u 1000 -r -g app -m -d /app -s /sbin/nologin -c "App user" app && \
     chmod 755 /app
 
-# Set the working directory to app home directory
-WORKDIR /app
 
 # Specify the user to execute all commands below
 USER app
