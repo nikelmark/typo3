@@ -70,4 +70,3 @@ WORKDIR /app
 # Specify the user to execute all commands below
 USER app
 
-CMD ["su", "-", "user", "-c", "/bin/bash"]
