@@ -37,6 +37,8 @@ RUN chmod g+w /var/log/apache2 && \
     chmod g+w /var/lock/apache2 && \
     chmod g+w /var/run/apache2 
 
+USER 1001
+
 RUN cd /var/www/html && \
     wget -O - https://netcologne.dl.sourceforge.net/project/typo3/TYPO3%20Source%20and%20Dummy/TYPO3%208.7.1/typo3_src-8.7.1.tar.gz | tar -xzf - && \
     ln -s typo3_src-* typo3_src && \
