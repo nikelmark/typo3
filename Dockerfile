@@ -2,13 +2,13 @@ FROM php:7.1-apache
 MAINTAINER Nikel Mark
 
 # Add the user UID:1000, GID:1000, home at /app
-RUN groupadd -r docker && \
-    useradd user 
-    usermod -aG docker user
+#RUN groupadd -r docker && \
+ #   useradd user 
+  #  usermod -aG docker user
 
 
 # Specify the user to execute all commands below
-USER user
+USER 0
 
 # Install TYPO3
 RUN apt-get update && \
