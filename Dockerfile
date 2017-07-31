@@ -68,6 +68,8 @@ VOLUME /var/www/html/typo3conf
 VOLUME /var/www/html/typo3temp
 VOLUME /var/www/html/uploads
 
+USER root
+
 RUN chmod +x /typo3/docker-entrypoint.sh
 
 CMD ["/typo3/docker-entrypoint.sh"]
