@@ -68,8 +68,8 @@ VOLUME /var/www/html/typo3conf
 VOLUME /var/www/html/typo3temp
 VOLUME /var/www/html/uploads
 
-COPY docker-entrypoint.sh /
+COPY containerfiles/ /
 
-RUN chmod +x docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
-CMD ["docker-entrypoint.sh"]
+CMD ["/docker-entrypoint.sh"]
